@@ -42,7 +42,8 @@ This document outlines the design system for the project.
   - `.ruleButton`
   - `.Button`
   - `.tooltip`
-
+- **Screenshot**:
+![Header](design_system/assets/header.png)
 
 ### Modal
 - **Description**: Displays the game rules when the "How to play" button is clicked.
@@ -51,6 +52,8 @@ This document outlines the design system for the project.
   - `.modal`
   - `.modal-content`
   - `.close`
+- **Screenshot**:
+![Modal](design_system/assets/modal.png)
 
 ### Scoreboard
 - **Description**: Displays the current player's turn and the winning message.
@@ -61,6 +64,8 @@ This document outlines the design system for the project.
   - `h2`
   - `.winning-message`
   - `.winning-message`
+- **Screenshot**:
+![Scoreboard](design_system/assets/scoreboard_on_win.png)
 
 ### Play Area
 - **Description**: The main game board where the tic-tac-toe game is played. This part also includes the "Restart Game" button.
@@ -70,6 +75,8 @@ This document outlines the design system for the project.
   - `.cell`
   - `.cell.win`
   - `.button`
+- **Screenshot**:
+![PlayArea](design_system/assets/play_area.png)
 
 ### Animation
 - **Description**: Falling X's and O's as a background animation.
