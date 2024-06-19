@@ -10,8 +10,10 @@ let cells; // Declare cells array
 function startGame() {
     board = Array(9).fill(null);
     currentPlayer = 'X';
+    resetMessage();
     document.getElementById('message').textContent = `Player ${currentPlayer}'s turn`;
     renderBoard();
+    
 }
 
 function renderBoard() {
@@ -39,6 +41,7 @@ function handleCellClick(index) {
     if (checkWinner()) {
         document.getElementById('message').textContent = `Player ${currentPlayer} wins!`;
         highlightWinningCells(); // Highlight winning cells
+        showWinMessage();
     } else if (board.every(cell => cell)) {
         document.getElementById('message').textContent = `It's a tie!`;
     } else {
@@ -66,6 +69,21 @@ function highlightWinningCells() {
     });
 }
 
+function showWinMessage() {
+    const overlay = document.getElementById('overlay');
+    overlay.style.display = 'block'; // Show the overlay
+    const message = document.getElementById('message');
+    message.classList.add('winning-message'); // Apply 3D effect
+}
+
+
+function resetMessage() {
+    const overlay = document.getElementById('overlay');
+    overlay.style.display = 'none';
+    const message = document.getElementById('message');
+    message.classList.remove('winning-message');
+    message.textContent = '';
+}
 
 
 // Start the game initially

@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic Tac Toe</title>
-    
+    <link rel="stylesheet" href="animation.css">
+    <link rel="stylesheet" href="modal.css">
     <link rel="stylesheet" href="tic.css">
 </head>
 <body>
@@ -20,10 +21,12 @@
             <p>Players take turns putting their marks in empty squares. The first player to get 3 of her marks in a row (up, down, across, or diagonally) is the winner. When all 9 squares are full, the game is over. If no player has 3 marks in a row, the game ends in a tie.</p>
         </div>
     </div>
+    <div id="overlay"></div>
     <h2 id="message"></h2>
     <div id="gameBoard" class="game-board"></div>
     <button onclick="startGame()">Restart Game</button>
     <script src="tic.js"></script>
     <script src="modal.js"></script>
+    <script src="animation.js"></script>
 </body>
 </html>

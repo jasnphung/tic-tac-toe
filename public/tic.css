@@ -57,6 +57,7 @@ button {
     border: 2px solid white;
     border-radius: 10px;
     margin-bottom: 1em;
+    z-index: 2;
 }
 
 button:hover{
@@ -71,83 +72,37 @@ button:hover{
 }
 
 
-/* Modal Styling */
-.ruleButton {
 
-    padding: 10px 20px;
-    font-size: 1.5em;
-    background-color: black;
-    border-radius: 10px;; 
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white; 
-}
-.ruleButton:hover {
-    background-color: white; 
-    color: black
-}
-
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; 
-    z-index: 1; 
-    left: 0;
-    top: 0;
-    width: 100%; 
-    height: 100%; 
-    overflow: auto; 
-    background-color: rgba(0,0,0,0.5); 
+/* 3D Text Effect */
+.winning-message {
+    font-size: 5em;
+    color: white;
+    text-shadow: 1px 1px 1px #373636,
+    1px 2px 1px #373636,
+    1px 3px 1px #373636,
+    1px 4px 1px #373636,
+    1px 5px 1px #373636,
+    1px 6px 1px #373636,
+    1px 7px 1px #373636,
+    1px 8px 1px #373636,
+    1px 9px 1px #373636,
+    1px 10px 1px #373636,
+1px 18px 6px rgba(16,16,16,0.4),
+1px 22px 10px rgba(16,16,16,0.2),
+1px 25px 35px rgba(16,16,16,0.2),
+1px 30px 60px rgba(16,16,16,0.4);
+    z-index: 1;
 }
 
-.modal-content {
-    background-color: black;
-    margin: 15% auto; 
-    padding: 20px;
-    border: 1px solid white;
-    width: 80%; 
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2), 0 6px 20px rgba(0,0,0,0.2); 
-}
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-/* Falling X's and O's animation */
-#fallingElementsContainer {
-    position: fixed; 
+/* Overlay to dim background */
+#overlay {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none; 
-    z-index: -1; 
-    overflow: hidden;
-}
-
-.falling-element {
-    position: absolute;
-    top: -30%;
-    left: calc(100vw * var(--random-x)); /* Randomize X position */
-    font-size: 1em;
-    color: rgb(156, 146, 146); 
-    animation: fall linear var(--duration) infinite; 
-}
-
-@keyframes fall {
-    0% {
-        transform: translateY(-10%);
-        opacity: 1; 
-    }
-    85% {
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(4000%);
-        opacity: 0; 
-    }
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 1;
+    pointer-events: none; /* Ensure overlay does not interfere with game interaction */
 }
