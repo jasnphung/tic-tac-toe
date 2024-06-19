@@ -11,14 +11,12 @@ let mode = 2; // 1: Player vs Computer, 2: Player vs Player
 document.getElementById('modeButton').addEventListener('click', function() {
     mode = mode === 1 ? 2 : 1;
     console.log(`Mode: ${mode}`);
-
+    const buttonText = this.querySelector('.button-text');
     if (mode === 1) {
-        document.getElementById('modeButton').textContent = 'Player vs Computer (Click to change modes)';
+        buttonText.textContent = 'Player vs Computer';
+    } else {
+        buttonText.textContent = 'Player vs Player';
     }
-    else {
-        document.getElementById('modeButton').textContent = 'Player vs Player (Click to change modes)';
-    }
-
     startGame();
 });
 

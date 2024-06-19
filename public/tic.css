@@ -39,11 +39,12 @@ h1 {
         1px 1px 0 #ffffff,
         1px -1px 0 #ffffff,
         -1px -1px 0 #ffffff;
+    margin-bottom: 0.2em;
 }
 
 
 h2 {
-    margin: 5px 0;
+    margin: 1px 0;
     font-size: 2.5em;
     color: white; 
 }
@@ -63,6 +64,33 @@ button {
 button:hover{
     background-color: white;
     color: black
+}
+/* Tooltip container */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    margin-bottom: 1em;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    color: #fff;
+    text-align: center;
+    font-size: 0.4em; 
+    position: absolute;
+    z-index: 1;
+    top: 125%; 
+    left: 50%;
+    margin-left: -80px; 
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
 }
 
 
