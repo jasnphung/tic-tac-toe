@@ -6,6 +6,21 @@ const winPatterns = [
     [0, 4, 8], [2, 4, 6] // Diagonals
 ];
 let cells; // Declare cells array
+let mode = 2; // 1: Player vs Computer, 2: Player vs Player
+
+document.getElementById('modeButton').addEventListener('click', function() {
+    mode = mode === 1 ? 2 : 1;
+    console.log(`Mode: ${mode}`);
+
+    if (mode === 1) {
+        document.getElementById('modeButton').textContent = 'Player vs Computer (Click to change modes)';
+    }
+    else {
+        document.getElementById('modeButton').textContent = 'Player vs Player (Click to change modes)';
+    }
+
+    startGame();
+});
 
 function startGame() {
     board = Array(9).fill(null);
@@ -13,7 +28,27 @@ function startGame() {
     resetMessage();
     document.getElementById('message').textContent = `Player ${currentPlayer}'s turn`;
     renderBoard();
-    
+}
+
+function computerMove() {
+    const emptyCells = board.map((cell, index) => cell === null ? index : null).filter(val => val !== null);
+    if (emptyCells.length > 0) {
+        setTimeout(() => {
+            const randomCellIndex = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+            board[randomCellIndex] = 'O';
+            renderBoard();
+            if (checkWinner()) {
+                document.getElementById('message').textContent = `Player ${currentPlayer} wins!`;
+                highlightWinningCells();
+                showWinMessage();
+            } else if (board.every(cell => cell)) {
+                document.getElementById('message').textContent = `It's a tie!`;
+            } else {
+                currentPlayer = 'X';
+                document.getElementById('message').textContent = `Player ${currentPlayer}'s turn`;
+            }
+        }, 500);
+    }
 }
 
 function renderBoard() {
@@ -45,8 +80,15 @@ function handleCellClick(index) {
     } else if (board.every(cell => cell)) {
         document.getElementById('message').textContent = `It's a tie!`;
     } else {
-        currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-        document.getElementById('message').textContent = `Player ${currentPlayer}'s turn`;
+        if (mode === 2) {
+            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+            document.getElementById('message').textContent = `Player ${currentPlayer}'s turn`;
+        }
+        else {
+            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+            document.getElementById('message').textContent = `Player ${currentPlayer}'s turn`;
+            computerMove();
+        }
     }
 }
 
