@@ -1,12 +1,12 @@
 # tic-tac-toe
 
-Welcome to the Tic Tac Toe game project as part of CSI3140 assignment
+Welcome to the Tic Tac Toe game project as part of CSI3140 assignment.
 
 ## Description
-This project is a  Tic Tac Toe game built with HTML, CSS, and JavaScript.
+This project is a  Tic Tac Toe game built with HTML, CSS, JavaScript, and PHP.
 
 ## Features
-- Player-Player or Player-Computer gameplay
+- Player-Computer gameplay
 - Interactive UI
 - Winning message display
 - Falling X's and O's animation
