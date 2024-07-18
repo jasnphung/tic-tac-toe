@@ -17,37 +17,33 @@ For detailed information about the design system used in this project, please re
 ## Screenshots 
 
 ### Initial Game Interface
-![Initial Interface](docs/design_system/assets/initial_interface.png)
+
+![Initial Interface](docs/design_system/assets/v2/initial_interface.png)
 
 ### Rules
 
-![Rules](docs/design_system/assets/rules.png)
-
-
-### Player vs Player Mode
-
-![Player vs Player](docs/design_system/assets/player_vs_player.png)
+![Rules](docs/design_system/assets/v2/rules.png)
 
 ### Player vs Computer Mode
 
-![Player vs Computer](docs/design_system/assets/player_vs_computer.png)
+![Player vs Computer](docs/design_system/assets/v2/player_vs_computer.png)
 
 ### Winning state
 
-![Winning state](docs/design_system/assets/wining_state.png)
+![Winning state](docs/design_system/assets/v2/wining_state.png)
 
 ### It's a tie state
 
-![Tie state](docs/design_system/assets/tie_state.png)
-
-
+![Tie state](docs/design_system/assets/v2/tie_state.png)
 
 ## How to Play
 1. Start the game by clicking on any cell.
-2. Players take turns clicking on empty cells to place their mark (X or O).
+2. The player (X) plays against the computer (O), placing an X on their turn and having the computer subsequently place an O.
 3. The game ends when one player gets three marks in a row (horizontally, vertically, or diagonally) or all cells are filled without a winner.
 
 ## Setup
-To run this project locally:
+To run this project locally with the PHP component:
 1. Clone the repository.
-2. Open `index.html` in your web browser.
+2. Navigate to the project location within CMD.
+3. Use: php -S localhost:9000
+4. Navigate to http://localhost:9000 in your web browser.

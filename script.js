@@ -3,6 +3,7 @@ let gameActive = true;
 let cells;
 let scores = {};
 
+let mode = 2; // 1: Player vs Computer, 2: Player vs Player
 
 function startGame() {
     //request to reset the game
@@ -22,6 +23,7 @@ function startGameBoard() {
     document.getElementById('message').textContent = `Player ${currentPlayer}'s turn`;
     renderBoard();
 }
+
 function renderBoard() {
     console.log("rendering board");
     const gameBoard = document.getElementById('gameBoard');
@@ -38,6 +40,7 @@ function renderBoard() {
         cells.push(cellElement); // Push each cell element into cells array
     });
 }
+
 function handleCellClick(index) {
     if (board[index] || !gameActive) return; // Check if cell is already occupied or game is over
 

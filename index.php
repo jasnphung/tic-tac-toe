@@ -35,6 +35,7 @@ $_SESSION["scores"] = ['X' => 0, 'O' => 0];
 </button> -->
 <!-- <h2>Player vs Computer</h2> -->
 <div id="leaderboard" class="leaderboard">
+    <div class="title">Player leaderboard</div>
     <div class="player-score">
         <span class="player">Player X:</span>
         <span id="playerXScore" class="score">0</span>
