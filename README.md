@@ -30,7 +30,7 @@ For detailed information about the design system used in this project, please re
 
 ### Winning state
 
-![Winning state](docs/design_system/assets/v2/wining_state.png)
+![Winning state](docs/design_system/assets/v2/winning_state.png)
 
 ### It's a tie state
 
