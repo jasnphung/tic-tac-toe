@@ -6,9 +6,11 @@ class Game {
     public $currentPlayer;
     public $mode; // To store the game mode: 'pvp' (player vs player) or 'pvc' (player vs computer)
 
-    public function __construct($mode = 'pvc') {
+    public function __construct() {
+        $this->handlePostRequest(); // Handle any POST requests
         $this->resetGame();
-        $this->mode = $mode;
+        $this->mode = isset($_SESSION['mode']) ? $_SESSION['mode'] : 'pvc'; // Use session mode or default to 'pvc'
+        error_log('Game mode on start: ' . $this->mode); // Log the current mode
     }
 
     public function resetGame() {
@@ -81,11 +83,23 @@ class Game {
     // Set mode method
     public function setMode($mode) {
         $this->mode = $mode;
+        $_SESSION['mode'] = $mode; // Ensure session is updated
     }
 
     // Get mode method
     public function getMode() {
         return $this->mode;
+    }
+
+    private function handlePostRequest() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'changeMode' && in_array($_POST['mode'], ['pvp', 'pvc'])) {
+            $this->changeMode($_POST['mode']);
+        }
+    }
+
+    private function changeMode($mode) {
+        $this->mode = $mode;
+        $_SESSION['mode'] = $mode; // Update the session to reflect the change
     }
 }
 ?>

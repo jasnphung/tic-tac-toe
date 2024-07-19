@@ -67,6 +67,20 @@ if (isset($_POST["action"])) {
             echo json_encode($response);
             break;
 
+        case "changeMode":
+            $mode = $_POST["mode"] ?? null;
+            if (in_array($mode, ['pvp', 'pvc'])) {
+                $_SESSION["game"]->setMode($mode);
+                $response = [
+                    'success' => true,
+                    'message' => 'Game mode changed to ' . $mode
+                ];
+            } else {
+                $response = ['error' => 'Invalid mode'];
+            }
+            echo json_encode($response);
+            break;
+
         default:
             echo json_encode(['error' => 'Invalid action']);
             break;

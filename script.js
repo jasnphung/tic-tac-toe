@@ -201,3 +201,34 @@ function renderLeaderboard() {
 
 //on load, execute the startGame() function
 window.addEventListener("load", startGame);
+
+document.addEventListener('DOMContentLoaded', function() {
+    var toggleModeButton = document.getElementById('toggleMode');
+    if (toggleModeButton) {
+        toggleModeButton.addEventListener('click', function() {
+            var currentMode = this.textContent.includes('Player vs Player') ? 'pvc' : 'pvp';
+            fetch('models/session.php', { // Ensure correct path to session.php
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    action: 'changeMode',
+                    mode: currentMode
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(data => {
+                console.log('Server response:', data); // Log server response
+                this.textContent = currentMode === 'pvp' ? 'Player vs Player' : 'Player vs Computer';
+                startGame();
+            })
+            .catch(error => console.error('Error changing mode:', error));
+        });
+    }
+});
