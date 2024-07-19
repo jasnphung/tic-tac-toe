@@ -204,7 +204,35 @@ window.addEventListener("load", startGame);
 
 document.addEventListener('DOMContentLoaded', function() {
     var toggleModeButton = document.getElementById('toggleMode');
+
     if (toggleModeButton) {
+        // Fetch the current mode from the server
+        fetch('models/session.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams({
+                action: 'getMode'
+            })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json(); // Parse as JSON
+        })
+        .then(data => {
+            if (data.mode) {
+                // Update the button text based on the current mode
+                toggleModeButton.textContent = data.mode === 'pvp' ? 'Player vs Player' : 'Player vs Computer';
+            } else {
+                console.error('Error fetching mode:', data.error);
+            }
+        })
+        .catch(error => console.error('Error fetching mode:', error));
+
+        // Add event listener to change mode on button click
         toggleModeButton.addEventListener('click', function() {
             var currentMode = this.textContent.includes('Player vs Player') ? 'pvc' : 'pvp';
             fetch('models/session.php', {
@@ -221,12 +249,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-                return response.text();
+                return response.json(); // Parse as JSON
             })
             .then(data => {
-                console.log('Server response:', data); // Log server response
-                this.textContent = currentMode === 'pvp' ? 'Player vs Player' : 'Player vs Computer';
-                startGame();
+                if (data.success) {
+                    // Update the button text based on the new mode
+                    this.textContent = currentMode === 'pvp' ? 'Player vs Player' : 'Player vs Computer';
+                    startGame(); // Refresh the game
+                } else {
+                    console.error('Error changing mode:', data.error);
+                }
             })
             .catch(error => console.error('Error changing mode:', error));
         });

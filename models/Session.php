@@ -81,6 +81,11 @@ if (isset($_POST["action"])) {
             echo json_encode($response);
             break;
 
+        case "getMode":
+            $mode = $_SESSION["game"]->getMode();
+            echo json_encode(['mode' => $mode]);
+            break;
+
         default:
             echo json_encode(['error' => 'Invalid action']);
             break;

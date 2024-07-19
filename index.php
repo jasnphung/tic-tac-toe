@@ -47,7 +47,7 @@ $_SESSION["scores"] = ['X' => 0, 'O' => 0];
 </div>
 
 <button id="toggleMode" class="tooltip">
-    <span class="button-text">Player vs Computer</span>
+    <span class="button-text"></span> <!-- Button text live updates -->
     <span class="tooltiptext">Click to change the mode</span>
 </button>
 
