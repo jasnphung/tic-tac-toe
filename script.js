@@ -207,7 +207,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (toggleModeButton) {
         toggleModeButton.addEventListener('click', function() {
             var currentMode = this.textContent.includes('Player vs Player') ? 'pvc' : 'pvp';
-            fetch('models/session.php', { // Ensure correct path to session.php
+            fetch('models/session.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
