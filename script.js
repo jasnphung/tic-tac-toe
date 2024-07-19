@@ -3,8 +3,6 @@ let gameActive = true;
 let cells;
 let scores = {};
 
-let mode = 2; // 1: Player vs Computer, 2: Player vs Player
-
 function startGame() {
     //request to reset the game
     var xhttp = new XMLHttpRequest();
