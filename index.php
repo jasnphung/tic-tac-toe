@@ -1,16 +1,45 @@
-<?php 
-
-require "models/Game.php";
-
+<?php
 session_start();
+include 'db.php'; // Include database connection
 
-use Tic\Game;
+// Handle login
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
-$_SESSION["games"] = []; //stores a list of games that have been played
-$_SESSION["game"] = new Game();
-$_SESSION["scores"] = ['X' => 0, 'O' => 0];
+    if (!empty($email) && !empty($password)) {
+        // Prepare and execute query
+        $stmt = $pdo->prepare("SELECT * FROM Users WHERE emailaddress = :email");
+        $stmt->execute(['email' => $email]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
+        // Debug: Print user data for verification
+        echo '<pre>';
+        print_r($user);
+        echo '</pre>';
 
+        // Verify password and role
+        if ($user) {
+
+            if($user['role'] === 'Admin'){
+            // Assuming passwords are stored in plain text (not recommended for production)
+                if ($password === $user['password']) {
+                    $_SESSION['email'] = $email;
+                    header('Location: admin_dashboard.php');
+                    exit();
+                } else {
+                    $error = 'Invalid password.';
+                }
+            }
+            else {
+                $_SESSION['email'] = $email;
+                header('Location: player_dashboard.php');
+            }
+        }
+    } else {
+        $error = 'Please fill in all fields.';
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -18,53 +47,22 @@ $_SESSION["scores"] = ['X' => 0, 'O' => 0];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tic Tac Toe Game</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
-    <link rel="stylesheet" href="modal.css">
-    <link rel="stylesheet" href="animation.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> <!-- Include jQuery -->
+    <!-- <link href="style.css" rel="stylesheet" type="text/css"> -->
+    <title>Login</title>
 </head>
 <body>
-<div id="fallingElementsContainer"></div>
-<h1>Tic Tac Toe</h1>
-
-<button id="rulesButton" class="ruleButton">How to play</button>
-<!-- <button id="modeButton" class="tooltip">
-    <span class="button-text">Player vs Computer</span>
-    <span class="tooltiptext">Click to change the mode</span>
-</button> -->
-<!-- <h2>Player vs Computer</h2> -->
-<div id="leaderboard" class="leaderboard">
-    <div class="title">Player leaderboard</div>
-    <div class="player-score">
-        <span class="player">Player X:</span>
-        <span id="playerXScore" class="score">0</span>
+    <div class="container">
+        <h1>Login</h1>
+        <?php if (isset($error)) echo "<p>$error</p>"; ?>
+        <form method="post">
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit" name="login">Login</button>
+        </form>
+        <h2>Don't have an account?</h2>
+        <a href="player_signup.php">Sign Up</a>
     </div>
-    <div class="player-score">
-        <span class="player">Player O:</span>
-        <span id="playerOScore" class="score">0</span>
-    </div>
-</div>
-
-<button id="toggleMode" class="tooltip">
-    <span class="button-text"></span> <!-- Button text live updates -->
-    <span class="tooltiptext">Click to change the mode</span>
-</button>
-
-<div id="rulesModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>How to play</h2>
-            <p>Players take turns putting their marks in empty squares. The first player to get 3 of her marks in a row (up, down, across, or diagonally) is the winner. When all 9 squares are full, the game is over. If no player has 3 marks in a row, the game ends in a tie.</p>
-        </div>
-    </div>
-<div id="overlay"></div>
-<h2 id="message"></h2>
-<div id="gameBoard" class="game-board"></div>
-<button onclick="startGame()">Restart Game</button>
-<script src="modal.js"></script>
-<script src="animation.js"></script>
-<script src="script.js"></script> <!-- Link to your script.js file -->
-
 </body>
 </html>
