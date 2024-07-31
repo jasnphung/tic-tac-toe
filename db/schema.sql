@@ -11,10 +11,12 @@ CREATE TABLE Users (
 INSERT INTO Users (EmailAddress, Password, Country, Role) VALUES ('admin@tictactoe.com', 'tic', 'Canada', 'Admin');
 INSERT INTO Users (EmailAddress, Password, Country, Role) VALUES ('testplayer@tictactoe.com', 'tic', 'Canada', 'Player');
 
-CREATE TABLE Games (
-    ID SERIAL PRIMARY KEY,
-    Game INT NOT NULL,
-    Round INT NOT NULL,
-    Player VARCHAR NOT NULL,
-    Winner VARCHAR,
-)
+CREATE TABLE Leaderboard (
+    EmailAddress VARCHAR NOT NULL,
+    WinsAsX INT NOT NULL,
+    PRIMARY KEY (EmailAddress),
+);
+
+INSERT INTO Leaderboard (EmailAddress, WinsAsX) VALUES ('admin@tictactoe.com', 5);
+INSERT INTO Leaderboard (EmailAddress, WinsAsX) VALUES ('testplayer@tictactoe.com', 3);
+
