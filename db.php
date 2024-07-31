@@ -2,7 +2,7 @@
 $host = 'localhost';
 $dbname = 'tictacdb';
 $user = 'postgres';
-$pass = '';//INCLUDE YOUR PASSWORD TO ACCES THE DB
+$pass = 'admin'; //INCLUDE YOUR PASSWORD TO ACCES THE DB OR REMOVE IF NO PASSWORD IS SET
 
 try {
     $dsn = "pgsql:host=$host;port=5432;dbname=$dbname;";

@@ -39,14 +39,23 @@ h1 {
         1px 1px 0 #ffffff,
         1px -1px 0 #ffffff,
         -1px -1px 0 #ffffff;
-    margin-bottom: 0.2em;
+    margin-bottom: 0.1em;
 }
 
-
 h2 {
-    margin: 1px 0;
-    font-size: 2.5em;
-    color: white; 
+    color: black;
+    font-size: 2em;
+    text-shadow: -3px 1px 0 #ffffff,
+        1px 1px 0 #ffffff,
+        1px -1px 0 #ffffff,
+        -1px -1px 0 #ffffff;
+    margin-bottom: 0.75em;
+}
+
+p {
+    color: rgb(255, 255, 255);
+    font-size: 1em;
+    margin-bottom: 0.5em;
 }
 
 button {
@@ -65,6 +74,12 @@ button:hover{
     background-color: white;
     color: black
 }
+
+.button-row {
+    display: flex;
+    gap: 20px; /* Adjust the gap between buttons as needed */
+}
+
 /* Tooltip container */
 .tooltip {
     position: relative;
@@ -134,14 +149,40 @@ button:hover{
     z-index: 1;
     pointer-events: none; /* Ensure overlay does not interfere with game interaction */
 }
+
+.leaderboardContainer {
+    display: flex;
+    gap: 20px; /* Adjust the gap between the leaderboards as needed */
+    justify-content: center;
+    align-items: center;
+}
+
 /* CSS for leaderboard */
 .leaderboard {
+    flex: 0 0 220px;
+    height: 400px;
     background-color: #000;
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5); /* White shadow */
     padding: 20px;
-    width: 220px; /* Adjust width as needed */
     margin: 20px auto; /* Center the leaderboard horizontally */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.gameArea {
+    flex: 0 0 500px;
+    background-color: #000;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5); /* White shadow */
+    padding: 20px;
+    margin: 20px auto; /* Center the leaderboard horizontally */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .title {
@@ -166,4 +207,16 @@ button:hover{
 .score {
     font-weight: normal;
     color: #fff; /* White text */
+}
+
+.logoutButton {
+    padding: 10px 10px;
+    font-size: 1.25em;
+    cursor: pointer;
+    background-color: black; 
+    color: white; 
+    border: 2px solid white;
+    border-radius: 10px;
+    margin-bottom: 1em;
+    z-index: 2;
 }

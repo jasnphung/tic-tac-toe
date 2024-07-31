@@ -10,3 +10,11 @@ CREATE TABLE Users (
 
 INSERT INTO Users (EmailAddress, Password, Country, Role) VALUES ('admin@tictactoe.com', 'tic', 'Canada', 'Admin');
 INSERT INTO Users (EmailAddress, Password, Country, Role) VALUES ('testplayer@tictactoe.com', 'tic', 'Canada', 'Player');
+
+CREATE TABLE Games (
+    ID SERIAL PRIMARY KEY,
+    Game INT NOT NULL,
+    Round INT NOT NULL,
+    Player VARCHAR NOT NULL,
+    Winner VARCHAR,
+)
