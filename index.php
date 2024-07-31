@@ -21,8 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
         // Verify password and role
         if ($user) {
 
-            if($user['role'] === 'Admin'){
-            // Assuming passwords are stored in plain text (not recommended for production)
+            if ($user['role'] === 'Admin') {
+                // Assuming passwords are stored in plain text (not recommended for production)
                 if ($password === $user['password']) {
                     $_SESSION['email'] = $email;
                     header('Location: admin_dashboard.php');
@@ -30,8 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
                 } else {
                     $error = 'Invalid password.';
                 }
-            }
-            else {
+            } else {
                 $_SESSION['email'] = $email;
                 header('Location: player_dashboard.php');
             }
@@ -44,25 +43,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link href="style.css" rel="stylesheet" type="text/css"> -->
+    <link rel="stylesheet" href="styles.css">
     <title>Login</title>
 </head>
+
 <body>
     <div class="container">
-        <h1>Login</h1>
+        <h1 style="margin-left: 24px">Login</h1>
         <?php if (isset($error)) echo "<p>$error</p>"; ?>
         <form method="post">
-            <label for="email">Email Address:</label>
-            <input type="email" id="email" name="email" required>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            <button type="submit" name="login">Login</button>
+            <div class="form-container">
+                <div class="form-group">
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" name="login">Login</button>
+            </div>
         </form>
         <h2>Don't have an account?</h2>
-        <a href="player_signup.php">Sign Up</a>
+        <a href="player_signup.php" style="color: white">Sign Up</a>
     </div>
 </body>
+
 </html>

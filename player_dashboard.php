@@ -162,7 +162,9 @@ $highestScore = json_encode($highestScore); // Convert array to string for debug
 
     <div class="leaderboardContainer">
         <div id="top10leaderboard" class="leaderboard">
-            <div class="title">Top 10 Leaderboard</div>
+            <div class="title">Top 10 Leaderboard ⓘ
+                <span class="tooltiptext">Listed by whoever had the most number of wins as player x in 1 game</span>
+            </div>
             <?php foreach ($top10Users as $index => $user) : ?>
                 <div class="player-score">
                     <span class="player"><?php echo ($index + 1) . ':'; ?></span>
@@ -170,14 +172,11 @@ $highestScore = json_encode($highestScore); // Convert array to string for debug
                     <span id="top<?php echo ($index + 1); ?>score" class="score"><?php echo htmlspecialchars($user['winsasx']); ?></span> <!-- Adjusted key -->
                 </div>
             <?php endforeach; ?>
-            <div>
-                <p>(Listed by whoever had the most number of wins as player x in 1 game)</p>
-            </div>
         </div>
 
         <div class="gameArea">
             <button id="toggleMode" class="tooltip">
-                <span class="button-text"></span> <!-- Button text live updates -->
+                <span class="button-text"></span>
                 <span class="tooltiptext">Click to change the mode</span>
             </button>
             <h2 id="message"></h2>
@@ -185,7 +184,10 @@ $highestScore = json_encode($highestScore); // Convert array to string for debug
         </div>
 
         <div id="leaderboard" class="leaderboard">
-            <div class="title">Current score</div>
+            <div class="title">Current score ⓘ
+                <span class="tooltiptext">If your current score is higher than your highest score, it will be updated when you press New Game</span>
+            </div>
+
             <div class="player-score">
                 <span class="player">Player X:</span>
                 <span id="playerXScore" class="score">0</span>
@@ -195,11 +197,8 @@ $highestScore = json_encode($highestScore); // Convert array to string for debug
                 <span id="playerOScore" class="score">0</span>
             </div>
             <div class="player-score">
-                <span class="player">Highest Score as X:</span>
+                <span class="player">Your highest score as X:</span>
                 <span id="highestScore" class="score"><?php echo htmlspecialchars($highestScore); ?></span>
-            </div>
-            <div>
-                <p>(If your current score is higher than your highest score, it will be updated when you press New Game)</p>
             </div>
         </div>
     </div>
@@ -208,7 +207,9 @@ $highestScore = json_encode($highestScore); // Convert array to string for debug
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>How to play</h2>
-            <p>Players take turns putting their marks in empty squares. The first player to get 3 of her marks in a row (up, down, across, or diagonally) is the winner. When all 9 squares are full, the game is over. If no player has 3 marks in a row, the game ends in a tie.</p>
+            <p>Players take turns putting their marks in empty squares. The first player to get 3 of her marks in a row (up, down, across, or diagonally) is the winner.
+                When all 9 squares are full, the game is over. If no player has 3 marks in a row, the game ends in a tie. There are 2 game modes.
+                To switch between Player vs Player and Player vs Computer mode, press the button above the game board.</p>
         </div>
     </div>
     <div id="overlay"></div>

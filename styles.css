@@ -1,11 +1,10 @@
-
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
     font-family: Arial, sans-serif;
     background-color: black;
-    color: white; 
+    color: white;
 }
 
 .game-board {
@@ -15,7 +14,7 @@ body {
     gap: 10px;
     margin-top: 1em;
     margin-bottom: 1.5em;
-    padding: 10px; 
+    padding: 10px;
 }
 
 .cell {
@@ -24,12 +23,12 @@ body {
     align-items: center;
     width: 100px;
     height: 100px;
-    border: 2px solid white; 
+    border: 2px solid white;
     font-size: 4em;
     cursor: pointer;
     user-select: none;
-    background-color: black; 
-    color: white; 
+    background-color: black;
+    color: white;
 }
 
 h1 {
@@ -63,8 +62,8 @@ button {
     padding: 10px 20px;
     font-size: 2em;
     cursor: pointer;
-    background-color: black; 
-    color: white; 
+    background-color: black;
+    color: white;
     border: 2px solid white;
     border-radius: 10px;
     margin-top: 0.5em;
@@ -72,14 +71,15 @@ button {
     z-index: 2;
 }
 
-button:hover{
+button:hover {
     background-color: white;
     color: black
 }
 
 .button-row {
     display: flex;
-    gap: 20px; /* Adjust the gap between buttons as needed */
+    gap: 20px;
+    /* Adjust the gap between buttons as needed */
 }
 
 /* Tooltip container */
@@ -90,19 +90,33 @@ button:hover{
     margin-bottom: 1em;
 }
 
-/* Tooltip text */
 .tooltip .tooltiptext {
     visibility: hidden;
+    width: 250px;
+    background-color: #555;
     color: #fff;
     text-align: center;
-    font-size: 0.4em; 
+    border-radius: 6px;
+    padding: 5px 0;
     position: absolute;
     z-index: 1;
-    top: 125%; 
+    bottom: 125%;
     left: 50%;
-    margin-left: -80px; 
+    margin-left: -125px;
     opacity: 0;
     transition: opacity 0.3s;
+    font-size: 0.75em;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
 }
 
 .tooltip:hover .tooltiptext {
@@ -112,8 +126,8 @@ button:hover{
 
 
 .cell.win {
-    background-color: yellow; 
-    color: rgb(117, 139, 47); 
+    background-color: yellow;
+    color: rgb(117, 139, 47);
 }
 
 /* 3D Text Effect */
@@ -121,19 +135,19 @@ button:hover{
     font-size: 5em;
     color: white;
     text-shadow: 1px 1px 1px #373636,
-    1px 2px 1px #373636,
-    1px 3px 1px #373636,
-    1px 4px 1px #373636,
-    1px 5px 1px #373636,
-    1px 6px 1px #373636,
-    1px 7px 1px #373636,
-    1px 8px 1px #373636,
-    1px 9px 1px #373636,
-    1px 10px 1px #373636,
-1px 18px 6px rgba(16,16,16,0.4),
-1px 22px 10px rgba(16,16,16,0.2),
-1px 25px 35px rgba(16,16,16,0.2),
-1px 30px 60px rgba(16,16,16,0.4);
+        1px 2px 1px #373636,
+        1px 3px 1px #373636,
+        1px 4px 1px #373636,
+        1px 5px 1px #373636,
+        1px 6px 1px #373636,
+        1px 7px 1px #373636,
+        1px 8px 1px #373636,
+        1px 9px 1px #373636,
+        1px 10px 1px #373636,
+        1px 18px 6px rgba(16, 16, 16, 0.4),
+        1px 22px 10px rgba(16, 16, 16, 0.2),
+        1px 25px 35px rgba(16, 16, 16, 0.2),
+        1px 30px 60px rgba(16, 16, 16, 0.4);
     z-index: 1;
 }
 
@@ -147,12 +161,14 @@ button:hover{
     background: rgba(0, 0, 0, 0.5);
     display: none;
     z-index: 1;
-    pointer-events: none; /* Ensure overlay does not interfere with game interaction */
+    pointer-events: none;
+    /* Ensure overlay does not interfere with game interaction */
 }
 
 .leaderboardContainer {
     display: flex;
-    gap: 20px; /* Adjust the gap between the leaderboards as needed */
+    gap: 20px;
+    /* Adjust the gap between the leaderboards as needed */
     justify-content: center;
     align-items: center;
 }
@@ -163,9 +179,11 @@ button:hover{
     height: 400px;
     background-color: #000;
     border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5); /* White shadow */
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+    /* White shadow */
     padding: 20px;
-    margin: 20px auto; /* Center the leaderboard horizontally */
+    margin: 20px auto;
+    /* Center the leaderboard horizontally */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -176,9 +194,11 @@ button:hover{
     flex: 0 0 500px;
     background-color: #000;
     border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5); /* White shadow */
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+    /* White shadow */
     padding: 20px;
-    margin: 20px auto; /* Center the leaderboard horizontally */
+    margin: 20px auto;
+    /* Center the leaderboard horizontally */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -191,6 +211,8 @@ button:hover{
     text-align: center;
     margin-bottom: 20px;
     font-size: 1.5em;
+    position: relative;
+    display: inline-block;
 }
 
 .player-score {
@@ -201,22 +223,101 @@ button:hover{
 
 .player {
     font-weight: bold;
-    color: #fff; /* White text */
+    color: #fff;
+    /* White text */
 }
 
 .score {
     font-weight: normal;
-    color: #fff; /* White text */
+    color: #fff;
+    /* White text */
 }
 
 .logoutButton {
     padding: 10px 10px;
     font-size: 1.25em;
     cursor: pointer;
-    background-color: black; 
-    color: white; 
+    background-color: black;
+    color: white;
     border: 2px solid white;
     border-radius: 10px;
     margin-bottom: 1em;
     z-index: 2;
+}
+
+.test-div {
+    position: relative;
+    display: inline-block;
+}
+
+.title .tooltiptext {
+    visibility: hidden;
+    width: 250px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -125px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 0.75em;
+}
+
+.title .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.title:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    width: 100%;
+    max-width: 300px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #fff;
+}
+
+input {
+    padding: 10px;
+    width: 100%;
+    max-width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
