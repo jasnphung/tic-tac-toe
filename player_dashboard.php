@@ -199,7 +199,7 @@ if (isset($_POST['newGame'])) {
 
     <button onclick="startGame()">Reset Board</button> <!-- Previously restart game button -->
     <form method="post">
-        <!-- <input type="hidden" name="playerXScore" id="playerXScoreInput" value="0"> -->
+        <input type="hidden" name="playerXScore" id="playerXScoreInput" value="0">
         <button type="submit" name="newGame">New Game</button>
     </form>
 
