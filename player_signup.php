@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
         </form>
         <h2>Already have an account?</h2>
-        <a href="login.php" style="color: white">Login</a>
+        <a href="index.php" style="color: white">Login</a>
     </div>
 </body>
 </html>
