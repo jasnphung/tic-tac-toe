@@ -159,7 +159,7 @@ button:hover{
 
 /* CSS for leaderboard */
 .leaderboard {
-    flex: 0 0 220px;
+    flex: 0 0 300px;
     height: 400px;
     background-color: #000;
     border-radius: 8px;

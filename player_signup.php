@@ -14,6 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Prepare and execute query
         $stmt = $pdo->prepare("INSERT INTO Users (EmailAddress, Password, Country, Role) VALUES (:email, :password, :country, 'Player')");
         if ($stmt->execute(['email' => $email, 'password' => $hashedPassword, 'country' => $country])) {
+            $stmtLeaderboard = $pdo->prepare("INSERT INTO Leaderboard (EmailAddress, WinsAsX) VALUES (:email, 0)");
+            $stmtLeaderboard->execute(['email' => $email]);
             header('Location: index.php');
             exit();
         } else {
