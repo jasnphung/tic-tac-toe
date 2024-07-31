@@ -82,7 +82,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 // Fetch top 10 leaderboard
-function getTop10Users($pdo) {
+function getTop10Users($pdo)
+{
     $stmt = $pdo->query("SELECT emailaddress, winsasx FROM Leaderboard ORDER BY winsasx DESC LIMIT 10");
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -91,7 +92,8 @@ $top10Users = getTop10Users($pdo);
 // print_r($top10Users); // Debugging statement
 
 // Function to update the leaderboard
-function updateLeaderboard($pdo, $email, $playerXScore) {
+function updateLeaderboard($pdo, $email, $playerXScore)
+{
     // Fetch the current highest score for the player
     $stmt = $pdo->prepare("SELECT winsasx FROM Leaderboard WHERE emailaddress = :email");
     $stmt->execute(['email' => $email]);
@@ -115,6 +117,14 @@ if (isset($_POST['newGame'])) {
     // Update the leaderboard
     updateLeaderboard($pdo, $email, $_POST['playerXScore']);
 }
+
+$stmt = $pdo->prepare("SELECT winsasx FROM Leaderboard WHERE emailaddress = :email");
+$stmt->execute(['email' => $email]);
+$result = $stmt->fetch(PDO::FETCH_ASSOC);
+$highestScore = $result['winsasx'] ?? 0;
+// Ensure highestScore is a string or numeric value
+$highestScore = json_encode($highestScore); // Convert array to string for debugging
+
 
 ?>
 
@@ -184,6 +194,13 @@ if (isset($_POST['newGame'])) {
                 <span class="player">Player O:</span>
                 <span id="playerOScore" class="score">0</span>
             </div>
+            <div class="player-score">
+                <span class="player">Highest Score as X:</span>
+                <span id="highestScore" class="score"><?php echo htmlspecialchars($highestScore); ?></span>
+            </div>
+            <div>
+                <p>(If your current score is higher than your highest score, it will be updated when you press New Game)</p>
+            </div>
         </div>
     </div>
 
@@ -204,19 +221,19 @@ if (isset($_POST['newGame'])) {
     </form>
 
     <div id="popup" class="popup">
-    <div class="popup-content">
-        <span class="close">&times;</span>
-        <h2>Update Your Profile</h2>
-        <form id="updateProfileForm" method="post">
-            <input type="hidden" name="action" value="updateProfile">
-            <label for="new_password">New Password:</label>
-            <input type="password" id="new_password" name="new_password" value="">
-            <label for="new_country">New Country:</label>
-            <input type="text" id="new_country" name="new_country" value="">
-            <button type="submit">Update Profile</button>
-        </form>
+        <div class="popup-content">
+            <span class="close">&times;</span>
+            <h2>Update Your Profile</h2>
+            <form id="updateProfileForm" method="post">
+                <input type="hidden" name="action" value="updateProfile">
+                <label for="new_password">New Password:</label>
+                <input type="password" id="new_password" name="new_password" value="">
+                <label for="new_country">New Country:</label>
+                <input type="text" id="new_country" name="new_country" value="">
+                <button type="submit">Update Profile</button>
+            </form>
+        </div>
     </div>
-</div>
 
 
     </div>
