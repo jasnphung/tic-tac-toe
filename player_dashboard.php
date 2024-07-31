@@ -40,39 +40,80 @@ $success_message = '';
 
 // Handle profile update
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $new_password = $_POST['new_password'];
-    $new_country = $_POST['new_country'];
+    if (isset($_POST['action']) && $_POST['action'] == 'updateProfile') {
+        $new_password = $_POST['new_password'];
+        $new_country = $_POST['new_country'];
 
-    if (empty($new_password) && empty($new_country)) {
-        $error_message = 'The fields can\'t be left empty. Try again.';
-    } else {
+        if (empty($new_password) && empty($new_country)) {
+            $error_message = 'The fields can\'t be left empty. Try again.';
+        } else {
+            try {
+                $update_fields = [];
+                $params = ['email' => $email];
+
+                if (!empty($new_password)) {
+                    $update_fields[] = "password = :new_password";
+                    $params['new_password'] = $new_password;
+                }
+
+                if (!empty($new_country)) {
+                    $update_fields[] = "country = :new_country";
+                    $params['new_country'] = $new_country;
+                }
+
+                if (!empty($update_fields)) {
+                    $stmt = $pdo->prepare("UPDATE Users SET " . implode(', ', $update_fields) . " WHERE emailaddress = :email");
+                    $stmt->execute($params);
+                    $success_message = 'Profile updated successfully!';
+                    // Refresh user details
+                    $stmt = $pdo->prepare("SELECT * FROM Users WHERE emailaddress = :email");
+                    $stmt->execute(['email' => $email]);
+                    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+                }
+            } catch (Exception $e) {
+                $error_message = 'Error updating profile: ' . $e->getMessage();
+            }
+        }
+    } elseif (isset($_POST['newGame'])) {
+        // Check if the "New Game" button is pressed
+        // Update the leaderboard
+        updateLeaderboard($pdo, $email, $_POST['playerXScore']);
+    }
+}
+
+// Fetch top 10 leaderboard
+function getTop10Users($pdo) {
+    $stmt = $pdo->query("SELECT emailaddress, winsasx FROM Leaderboard ORDER BY winsasx DESC LIMIT 10");
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+$top10Users = getTop10Users($pdo);
+// print_r($top10Users); // Debugging statement
+
+// Function to update the leaderboard
+function updateLeaderboard($pdo, $email, $playerXScore) {
+    // Fetch the current highest score for the player
+    $stmt = $pdo->prepare("SELECT winsasx FROM Leaderboard WHERE emailaddress = :email");
+    $stmt->execute(['email' => $email]);
+    $currentScore = $stmt->fetchColumn();
+
+    // Check if the new score is higher
+    if ($playerXScore > $currentScore) {
         try {
-            $update_fields = [];
-            $params = ['email' => $email];
-
-            if (!empty($new_password)) {
-                $update_fields[] = "password = :new_password";
-                $params['new_password'] = $new_password;
-            }
-
-            if (!empty($new_country)) {
-                $update_fields[] = "country = :new_country";
-                $params['new_country'] = $new_country;
-            }
-
-            if (!empty($update_fields)) {
-                $stmt = $pdo->prepare("UPDATE Users SET " . implode(', ', $update_fields) . " WHERE emailaddress = :email");
-                $stmt->execute($params);
-                $success_message = 'Profile updated successfully!';
-                // Refresh user details
-                $stmt = $pdo->prepare("SELECT * FROM Users WHERE emailaddress = :email");
-                $stmt->execute(['email' => $email]);
-                $user = $stmt->fetch(PDO::FETCH_ASSOC);
-            }
+            // Update the leaderboard with the new score
+            $stmt = $pdo->prepare("UPDATE Leaderboard SET winsasx = :playerXScore WHERE emailaddress = :email");
+            $stmt->execute(['playerXScore' => $playerXScore, 'email' => $email]);
         } catch (Exception $e) {
-            $error_message = 'Error updating profile: ' . $e->getMessage();
+            // Handle potential errors
+            echo 'Error updating leaderboard: ' . $e->getMessage();
         }
     }
+}
+
+// Check if the "New Game" button is pressed
+if (isset($_POST['newGame'])) {
+    // Update the leaderboard
+    updateLeaderboard($pdo, $email, $_POST['playerXScore']);
 }
 
 ?>
@@ -112,56 +153,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="leaderboardContainer">
         <div id="top10leaderboard" class="leaderboard">
             <div class="title">Top 10 Leaderboard</div>
-            <div class="player-score">
-                <span class="player">1:</span>
-                <span id="top1scoreUser" class="score">user@user.com</span>
-                <span id="top1score" class="score">0</span>
-            </div>
-            <div class="player-score">
-                <span class="player">2:</span>
-                <span id="top2scoreUser" class="score">user@user.com</span>
-                <span id="top2score" class="score">0</span>
-            </div>
-            <div class="player-score">
-                <span class="player">3:</span>
-                <span id="top3scoreUser" class="score">user@user.com</span>
-                <span id="top3score" class="score">0</span>
-            </div>
-            <div class="player-score">
-                <span class="player">4:</span>
-                <span id="top4scoreUser" class="score">user@user.com</span>
-                <span id="top4score" class="score">0</span>
-            </div>
-            <div class="player-score">
-                <span class="player">5:</span>
-                <span id="top5scoreUser" class="score">user@user.com</span>
-                <span id="top5score" class="score">0</span>
-            </div>
-            <div class="player-score">
-                <span class="player">6:</span>
-                <span id="top6scoreUser" class="score">user@user.com</span>
-                <span id="top6score" class="score">0</span>
-            </div>
-            <div class="player-score">
-                <span class="player">7:</span>
-                <span id="top7scoreUser" class="score">user@user.com</span>
-                <span id="top7score" class="score">0</span>
-            </div>
-            <div class="player-score">
-                <span class="player">8:</span>
-                <span id="top8scoreUser" class="score">user@user.com</span>
-                <span id="top8score" class="score">0</span>
-            </div>
-            <div class="player-score">
-                <span class="player">9:</span>
-                <span id="top9scoreUser" class="score">user@user.com</span>
-                <span id="top9score" class="score">0</span>
-            </div>
-            <div class="player-score">
-                <span class="player">10:</span>
-                <span id="top10scoreUser" class="score">user@user.com</span>
-                <span id="top10score" class="score">0</span>
-            </div>
+            <?php foreach ($top10Users as $index => $user) : ?>
+                <div class="player-score">
+                    <span class="player"><?php echo ($index + 1) . ':'; ?></span>
+                    <span id="top<?php echo ($index + 1); ?>scoreUser" class="score"><?php echo htmlspecialchars($user['emailaddress']); ?></span> <!-- Adjusted key -->
+                    <span id="top<?php echo ($index + 1); ?>score" class="score"><?php echo htmlspecialchars($user['winsasx']); ?></span> <!-- Adjusted key -->
+                </div>
+            <?php endforeach; ?>
 
             <div>
                 <p>(Listed by whoever had the most number of wins as player x in 1 game)</p>
@@ -201,22 +199,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
     <button onclick="startGame()">Reset Board</button> <!-- Previously restart game button -->
-    <button>New Game</button>
+    <form method="post">
+        <!-- <input type="hidden" name="playerXScore" id="playerXScoreInput" value="0"> -->
+        <button type="submit" name="newGame">New Game</button>
+    </form>
 
     <div id="popup" class="popup">
-        <div class="popup-content">
-            <span class="close">&times;</span>
-            <h2>Update Your Profile</h2>
-            <!-- Error and success messages will be injected here -->
-            <form id="updateProfileForm">
-                <label for="new_password">New Password:</label>
-                <input type="password" id="new_password" name="new_password" value="">
-                <label for="new_country">New Country:</label>
-                <input type="text" id="new_country" name="new_country" value="">
-                <button type="submit">Update Profile</button>
-            </form>
-        </div>
+    <div class="popup-content">
+        <span class="close">&times;</span>
+        <h2>Update Your Profile</h2>
+        <form id="updateProfileForm" method="post">
+            <input type="hidden" name="action" value="updateProfile">
+            <label for="new_password">New Password:</label>
+            <input type="password" id="new_password" name="new_password" value="">
+            <label for="new_country">New Country:</label>
+            <input type="text" id="new_country" name="new_country" value="">
+            <button type="submit">Update Profile</button>
+        </form>
     </div>
+</div>
 
 
     </div>

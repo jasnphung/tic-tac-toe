@@ -19,4 +19,3 @@ CREATE TABLE Leaderboard (
 
 INSERT INTO Leaderboard (EmailAddress, WinsAsX) VALUES ('admin@tictactoe.com', 5);
 INSERT INTO Leaderboard (EmailAddress, WinsAsX) VALUES ('testplayer@tictactoe.com', 3);
-

@@ -199,6 +199,19 @@ function renderLeaderboard() {
     document.getElementById('playerOScore').textContent = scores.O;
 }
 
+function updatePlayerXScoreInput() {
+    var playerXScoreInput = document.getElementById('playerXScoreInput');
+    if (scores.X !== undefined) {
+        playerXScoreInput.value = scores.X; // Set the score value
+    } else {
+        playerXScoreInput.value = 0; // Default value if scores.X is not defined
+    }
+}
+
+document.querySelector('form').addEventListener('submit', function(event) {
+    updatePlayerXScoreInput(); // Update the hidden input value
+});
+
 //on load, execute the startGame() function
 window.addEventListener("load", startGame);
 
