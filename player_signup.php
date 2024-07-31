@@ -32,21 +32,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
     <title>Sign Up</title>
 </head>
 <body>
     <div class="container">
-        <h1>Sign Up</h1>
+        <h1 style="margin-left: 24px">Sign Up</h1>
         <?php if (isset($error)) echo "<p>$error</p>"; ?>
         <form method="post">
-            <label for="email">Email Address:</label>
-            <input type="email" id="email" name="email" required>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            <label for="country">Country:</label>
-            <input type="text" id="country" name="country" required>
-            <button type="submit">Sign Up</button>
+            <div class="form-container">
+                <div class="form-group">
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="country">Country:</label>
+                    <input type="text" id="country" name="country" required>
+                </div>
+                <button type="submit">Sign Up</button>
+            </div>
         </form>
+        <h2>Already have an account?</h2>
+        <a href="login.php" style="color: white">Login</a>
     </div>
 </body>
 </html>
