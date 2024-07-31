@@ -160,7 +160,6 @@ if (isset($_POST['newGame'])) {
                     <span id="top<?php echo ($index + 1); ?>score" class="score"><?php echo htmlspecialchars($user['winsasx']); ?></span> <!-- Adjusted key -->
                 </div>
             <?php endforeach; ?>
-
             <div>
                 <p>(Listed by whoever had the most number of wins as player x in 1 game)</p>
             </div>

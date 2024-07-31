@@ -45,11 +45,12 @@ h1 {
 h2 {
     color: black;
     font-size: 2em;
-    text-shadow: -3px 1px 0 #ffffff,
+    text-shadow: -1px 1px 0 #ffffff,
         1px 1px 0 #ffffff,
         1px -1px 0 #ffffff,
         -1px -1px 0 #ffffff;
-    margin-bottom: 0.75em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
 }
 
 p {
@@ -66,7 +67,8 @@ button {
     color: white; 
     border: 2px solid white;
     border-radius: 10px;
-    margin-bottom: 1em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
     z-index: 2;
 }
 
@@ -113,8 +115,6 @@ button:hover{
     background-color: yellow; 
     color: rgb(117, 139, 47); 
 }
-
-
 
 /* 3D Text Effect */
 .winning-message {
