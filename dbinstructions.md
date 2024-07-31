@@ -1,6 +1,7 @@
 psql -U postgres
 
-CREATE database 
-\c tictacdb
+CREATE database tictacdb
+
+exit
 
 psql -U postgres -d tictacdb -f db/schema.sql
