@@ -26,6 +26,10 @@ if (isset($_POST['delete_user'])) {
 $stmt = $pdo->query("SELECT * FROM Users");
 $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+// Fetch the leaderboard data from the database
+$stmt = $pdo->query("SELECT * FROM Leaderboard");
+$leaderboard = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 // Handle logout
 if (isset($_POST['logout'])) {
     session_unset();
@@ -40,7 +44,7 @@ if (isset($_POST['logout'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link href="style.css" rel="stylesheet" type="text/css"> -->
+    <link href="admin_dashboard.css" rel="stylesheet" type="text/css">
     <title>Admin Dashboard</title>
 </head>
 <body>
@@ -79,11 +83,32 @@ if (isset($_POST['logout'])) {
                 <?php endforeach; ?>
             </tbody>
         </table>
+
+         <!-- Leaderboard Table -->
+         <h2>Leaderboard</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Email Address</th>
+                    <th>Wins As X</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($leaderboard as $entry): ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($entry['emailaddress']); ?></td>
+                        <td><?php echo htmlspecialchars($entry['winsasx']); ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+        
         
         <!-- Logout Form -->
-        <form method="post">
+        <form method="post" class="logout-form">
             <button type="submit" name="logout">Logout</button>
         </form>
+
     </div>
 </body>
 </html>
