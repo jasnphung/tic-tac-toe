@@ -52,7 +52,7 @@ To run this project locally with the PHP component (after the database is setup)
 
 ### Initial Game Interface
 
-![Initial Interface](docs/design_system/assets/v3/initial_interface.png)
+![Initial interface](docs/design_system/assets/v3/initial_interface.png)
 
 ### Rules
 
@@ -60,11 +60,11 @@ To run this project locally with the PHP component (after the database is setup)
 
 ### Player vs Player Mode
 
-![Player vs Player](docs/design_system/assets/v3/player_vs_player.png)
+![Player vs player mode](docs/design_system/assets/v3/player_vs_player.png)
 
 ### Player vs Computer Mode
 
-![Player vs Computer](docs/design_system/assets/v3/player_vs_computer.png)
+![Player vs computer mode](docs/design_system/assets/v3/player_vs_computer.png)
 
 ### Winning state
 
