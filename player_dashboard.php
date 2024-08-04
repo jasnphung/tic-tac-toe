@@ -222,19 +222,23 @@ $highestScore = json_encode($highestScore); // Convert array to string for debug
     </form>
 
     <div id="popup" class="popup">
-        <div class="popup-content">
-            <span class="close">&times;</span>
-            <h2>Update Your Profile</h2>
-            <form id="updateProfileForm" method="post">
-                <input type="hidden" name="action" value="updateProfile">
-                <label for="new_password">New Password:</label>
-                <input type="password" id="new_password" name="new_password" value="">
-                <label for="new_country">New Country:</label>
-                <input type="text" id="new_country" name="new_country" value="">
-                <button type="submit">Update Profile</button>
-            </form>
-        </div>
+    <div class="popup-content">
+        <span class="close">&times;</span>
+        <h2>Update Your Profile</h2>
+        <form id="updateProfileForm" method="post">
+            <input type="hidden" name="action" value="updateProfile">
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label for="new_password" style="display: block; margin-bottom: 5px;">New Password:</label>
+                <input type="password" id="new_password" name="new_password" value="" style="width: 100%;">
+            </div>
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label for="new_country" style="display: block; margin-bottom: 5px;">New Country:</label>
+                <input type="text" id="new_country" name="new_country" value="" style="width: 100%;">
+            </div>
+            <button type="submit">Update Profile</button>
+        </form>
     </div>
+</div>
 
 
     </div>

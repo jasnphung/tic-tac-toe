@@ -1,21 +1,32 @@
-# tic-tac-toe
+# Tic Tac Toe
 
 Welcome to the Tic Tac Toe game project as part of CSI3140 assignment.
 
 ## Description
-This project is a Tic Tac Toe game built with HTML, CSS, JavaScript, and PHP.
+This project is a Tic Tac Toe game built with HTML, CSS, JavaScript, PHP, and PostgreSQL.
 
 ## Features
-- Player vs Player
+- Player vs Player gameplay
 - Player vs Computer gameplay
 - Interactive UI
 - Winning message display
 - Falling X's and O's animation
+- Top 10 leaderboard
+- User account functionality (with admin and player roles)
+- Current score display
 
 ## Design System
 For detailed information about the design system used in this project, please refer to the [Design System](docs/design_system.md).
 
 ## Screenshots
+
+### Login page
+
+![Login page](docs/design_system/assets/v3/login.png)
+
+### Signup page
+
+![Signup page](docs/design_system/assets/v3/signup.png)
 
 ### Initial Game Interface
 
@@ -40,6 +51,14 @@ For detailed information about the design system used in this project, please re
 ### It's a tie state
 
 ![Tie state](docs/design_system/assets/v3/tie_state.png)
+
+### Update profile page
+
+![Update profile page](docs/design_system/assets/v3/update_profile.png)
+
+### Admin dashboard
+
+![Admin dashboard](docs/design_system/assets/v3/admin_dashboard.png)
 
 ## User instructions (how to play)
 1. Start the game by clicking on any cell.
